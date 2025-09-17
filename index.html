@@ -1,339 +1,532 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TIT SARL - Votre sécurité, notre priorité</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* Effet de survol animé sur les boutons */
-    .navbar .nav-links a,
-    .btn,
-    .btn-outline {
-      transition: transform 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.2s;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skoola | L'Éducation Réinventée par l'IA</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    .navbar .nav-links a:hover,
-    .btn:hover,
-    .btn-outline:hover {
-      transform: scale(1.08);
-      box-shadow: 0 4px 18px 0 rgba(0,0,0,0.12);
-    }
-    .welcome-message {
-      font-size: 1.1em;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #fff;
-    }
-    /* Texte circulaire animé en haut à droite */
-    .circular-text-container {
-      position: fixed;
-      top: 24px;
-      right: 40px;
-      width: 220px;
-      height: 220px;
-      pointer-events: none;
-      z-index: 1000;
-    }
-    .circular-text {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-      color: #fff;
-      font-size: 1.1em;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-align: center;
-      transform: rotate(0deg);
-      animation: rotateCircle 8s linear infinite;
-    }
-    @keyframes rotateCircle {
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-    /* Style doré pour les liens du menu de navigation */
-    .navbar .nav-links a {
-      color: #ffd700;
-      font-weight: 600;
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      transition: background 0.3s, color 0.3s;
-    }
+    <style>
+        :root {
+            --primary-glow: #0077ff;
+            --secondary-glow: #00e6a4;
+            --bg-dark: #0A0A0A;
+            --bg-medium: #111111;
+            --bg-light: #181818;
+            --text-primary: #EDEDED;
+            --text-secondary: #888888;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --font-family: 'Inter', sans-serif;
+        }
 
-    .navbar .nav-links a:hover,
-    .navbar .nav-links a.active {
-      background: #ffd700;
-      color: #003366;
-    }
-    /* Animation de défilement horizontal pour le sous-titre du header */
-    .scrolling-text {
-      display: inline-block;
-      white-space: nowrap;
-      overflow: hidden;
-      box-sizing: border-box;
-      animation: scroll-left 12s linear infinite;
-      font-size: 1.2em;
-      font-weight: 400;
-      color: #fff;
-      width: 100%;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    @keyframes scroll-left {
-      0% {
-        transform: translateX(100%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
-    }
-    /* Style pour le logo dans la navbar */
-    .navbar .logo img {
-      height: 50px;
-      vertical-align: middle;
-    }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
-      color: #333;
-      background: linear-gradient(-45deg, #001f3f, #003366, #ffd700, #444);
-      background-size: 400% 400%;
-      animation: gradientBG 12s ease-in-out infinite;
-    }
+        body {
+            font-family: var(--font-family);
+            color: var(--text-secondary);
+            background-color: var(--bg-dark);
+            line-height: 1.7;
+        }
 
-    @keyframes gradientBG {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
+        /* --- Global Styles & Helpers --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
-    header {
-      background: linear-gradient(to right, #001f3f, #003366);
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
-    }
+        section {
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
 
-    header h1 {
-      font-size: 2.8em;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: #ffd700;
-      text-shadow: 2px 2px #000;
-      animation: blink-colors 1.2s linear infinite;
-    }
+        h1, h2, h3, h4 {
+            color: var(--text-primary);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+        }
+        
+        h1 { font-size: 4rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 3rem; text-align: center; margin-bottom: 5rem; }
+        h3 { font-size: 1.6rem; margin-bottom: 0.75rem; }
+        p { margin-bottom: 1.5rem; max-width: 65ch; }
+        .text-gradient {
+            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    @keyframes blink-colors {
-      0% {
-        color: #001f3f; /* vert petrole */
-      }
-      33% {
-        color: #ffd700; /* jaune */
-      }
-      66% {
-        color: #444; /* gris foncé */
-      }
-      100% {
-        color: #001f3f;
-      }
-    }
 
-    header p {
-      font-size: 1.2em;
-      font-weight: 400;
-    }
+        /* --- Header --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 20px 0; z-index: 1000;
+            transition: background-color 0.3s ease, backdrop-filter 0.3s ease, border-bottom 0.3s;
+        }
+        header.scrolled {
+            background-color: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 900; color: var(--text-primary); text-decoration: none; }
+        .logo span { color: var(--primary-glow); }
 
-    .hero {
-      padding: 60px 20px;
-      text-align: center;
-      background-image: url('https://images.unsplash.com/photo-1603888584790-0f3f1c243a83'); /* Image de sécurité */
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      color: white;
-    }
+        /* --- Hero Section --- */
+        #hero {
+            padding-top: 220px; padding-bottom: 180px; text-align: center;
+            position: relative;
+        }
+        #hero-aurora {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 119, 255, 0.2) 0%, transparent 25%),
+                radial-gradient(circle at 80% 30%, rgba(0, 230, 164, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 50% 90%, rgba(0, 119, 255, 0.1) 0%, transparent 25%);
+            animation: aurora-flow 20s infinite linear;
+            z-index: -1;
+        }
+        #hero-spotlight {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.06) 0%, transparent 20%);
+            z-index: 0; opacity: 0; transition: opacity 0.3s;
+        }
+        #hero:hover #hero-spotlight { opacity: 1; }
+        #hero .container { position: relative; z-index: 1;}
+        #hero .subtitle { font-size: 1.25rem; max-width: 600px; margin: 0 auto 2.5rem auto; color: var(--text-secondary); }
+        .cta-button {
+            display: inline-block; padding: 16px 36px; border-radius: 12px;
+            font-size: 1.1rem; font-weight: 600; text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background: var(--primary-glow); color: white;
+            box-shadow: 0 0 30px rgba(0, 119, 255, 0.4), 0 0 50px rgba(0, 119, 255, 0.2);
+        }
+        .cta-button:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 0 40px rgba(0, 119, 255, 0.6), 0 0 60px rgba(0, 119, 255, 0.3); }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(0, 0, 0, 0.6);
-    }
+        /* --- Horizontal Scrolling Section --- */
+        .horizontal-scroll-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .story-container {
+            display: flex;
+            align-items: stretch;
+            width: 100%;
+            height: 60vh;
+        }
+        .story-sticky-title {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            left: 0;
+            width: 40%;
+            padding-right: 5%;
+        }
+        .story-scroll-track {
+            flex: 1.5;
+            display: flex;
+            gap: 5vw;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 20px 5vw;
+        }
+        .story-scroll-track::-webkit-scrollbar { display: none; }
+        .story-card {
+            flex: 0 0 80%;
+            scroll-snap-align: center;
+            background: var(--bg-medium);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .story-card .step-number { font-size: 3rem; font-weight: 900; color: var(--border-color); }
 
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
+        /* --- Bento Grid with 3D Tilt --- */
+        #fonctionnalites { padding-top: 150px; }
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(180px, auto); gap: 20px; }
+        .bento-card {
+            background-color: var(--bg-medium); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 24px; transition: transform 0.1s ease, border-color 0.3s ease;
+            position: relative; overflow: hidden; transform-style: preserve-3d;
+        }
+        .bento-card:hover { border-color: var(--primary-glow); }
+        .bento-card svg { width: 32px; height: 32px; color: var(--primary-glow); margin-bottom: 1rem; transition: transform 0.3s ease; }
+        .bento-card:hover svg { transform: scale(1.1); }
+        .bento-card.col-span-2 { grid-column: span 2; }
 
-    .hero h2 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-    }
+        /* --- Form Section --- */
+        #offre { background-color: var(--bg-medium); }
+        .offer-wrapper { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
+        .form-container { background: var(--bg-dark); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); position: relative; }
+        .form-container::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 16px; padding: 1px; background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: opacity 0.3s; }
+        .form-container:hover::before { opacity: 1; }
+        .form-group input:focus { outline: none; border-color: var(--primary-glow); box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.3); }
 
-    /* Animation de fondu pour le titre principal */
-    .hero-content h1 {
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 1.5s ease-out forwards;
-    }
+        /* --- FAQ Accordion --- */
+        .faq-item.active .faq-question { color: var(--primary-glow); }
+        .faq-item.active .faq-question::after { transform: rotate(45deg); color: var(--secondary-glow); }
+        
+        /* --- Animations --- */
+        @keyframes aurora-flow {
+            0% { background-position: 10% 20%, 80% 30%, 50% 90%; }
+            50% { background-position: 30% 80%, 10% 40%, 70% 20%; }
+            100% { background-position: 10% 20%, 80% 30%, 50% 90%; }
+        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s ease, transform 1s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        
+        /* --- Copied styles from previous version for brevity --- */
+        .countdown-item { text-align: center; background: var(--bg-dark); padding: 10px 15px; border-radius: 8px; }
+        .countdown-item span { display: block; font-size: 2rem; font-weight: 700; color: var(--text-primary); }
+        .countdown-item small { font-size: 0.8rem; text-transform: uppercase; color: var(--text-secondary); }
+        #countdown { display: flex; gap: 15px; margin: 2rem 0; }
+        .offer-benefits { list-style: none; padding: 0; margin: 2rem 0; }
+        .offer-benefits li { margin-bottom: 1rem; font-size: 1.1rem; display: flex; align-items: center; color: var(--text-primary); }
+        .offer-benefits li::before { content: '✓'; color: var(--secondary-glow); margin-right: 12px; font-weight: 800; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-secondary); }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-family: var(--font-family); background-color: var(--bg-light); color: var(--text-primary); font-size: 1rem; }
+        /* Feedback alerts */
+        .alert { padding: 12px 14px; border-radius: 8px; border: 1px solid transparent; }
+        .alert-success { background: rgba(16, 185, 129, 0.12); border-color: rgba(16,185,129,0.35); color: #a7f3d0; }
+        .alert-error { background: rgba(239, 68, 68, 0.12); border-color: rgba(239,68,68,0.35); color: #fecaca; }
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--border-color); }
+        .faq-question { padding: 25px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 1.3rem; font-weight: 600; transition: color 0.3s;}
+        .faq-question::after { content: '+'; font-size: 2rem; font-weight: 400; color: var(--primary-glow); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+        .faq-answer p { padding-bottom: 25px; font-size: 1.1rem; }
+        footer { padding: 60px 0 20px 0; }
+        .footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9rem; }
+        
+        /* --- Responsive Design --- */
+        @media(max-width: 992px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2.5rem; }
+            .story-container { flex-direction: column; height: auto; }
+            .story-sticky-title { position: static; width: 100%; text-align: center; padding: 0 0 2rem 0; }
+            .story-scroll-track { flex-direction: column; overflow-x: visible; gap: 20px; padding: 0;}
+            .story-card { flex: 1; }
+            .horizontal-scroll-section { height: auto; }
+        }
+        @media(max-width: 768px) {
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-card.col-span-2 { grid-column: span 1; }
+            .offer-wrapper { grid-template-columns: 1fr; }
+        }
 
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .hero a {
-      background-color: #ffd700;
-      color: #003366;
-      padding: 12px 24px;
-      text-decoration: none;
-      font-weight: 600;
-      border-radius: 8px;
-      transition: background 0.3s;
-    }
-
-    .hero a:hover {
-      background-color: #ffc400;
-    }
-
-    footer {
-      background-color: #001f3f;
-      color: #ccc;
-      padding: 20px;
-      text-align: center;
-      font-size: 0.9em;
-    }
-  </style>
+    </style>
 </head>
 <body>
 
-  <!-- Texte circulaire animé en haut à droite -->
-  <div class="circular-text-container">
-    <svg viewBox="0 0 220 220" width="220" height="220">
-      <defs>
-        <path id="circlePath" d="M 110, 110 m -90, 0 a 90,90 0 1,1 180,0 a 90,90 0 1,1 -180,0"/>
-      </defs>
-      <text class="circular-text">
-        <textPath xlink:href="#circlePath" startOffset="0">Le monde de l'intelligence artificielle • </textPath>
-      </text>
-    </svg>
-  </div>
+    <header id="main-header">
+        <div class="container nav-container">
+            <a href="#" class="logo">Skoola<span>.</span></a>
+        </div>
+    </header>
 
-  <header>
-  <p class="welcome-message">Bienvenue sur le site officiel TIT SARL&nbsp;!</p>
-  <h1>TIT SARL</h1>
-  <p class="scrolling-text">Spécialiste en sécurité électronique & systèmes intelligents</p>
+    <main>
+        <section id="hero">
+            <div id="hero-aurora"></div>
+            <div id="hero-spotlight"></div>
+            <div class="container reveal">
+                <h1>L'Éducation Africaine, <br> <span class="text-gradient">Réinventée.</span></h1>
+                <p class="subtitle">Skoola est le système d'exploitation pour l'établissement de demain. Fusionnez data, IA et automatisation pour atteindre une excellence inégalée.</p>
+                <a href="#offre" class="cta-button">Devenir un Partenaire Fondateur</a>
+            </div>
+        </section>
 
+        <section class="horizontal-scroll-section">
+            <div class="story-container">
+                <div class="story-sticky-title reveal">
+                    <h2>De la complexité <br>à la <span class="text-gradient">clarté</span>.</h2>
+                </div>
+                <div class="story-scroll-track">
+                    <div class="story-card reveal">
+                        <span class="step-number">01</span>
+                        <h3>Centraliser</h3>
+                        <p>Fini les silos de données. Notes, présences, finances, communication — tout converge sur une plateforme unique, sécurisée et accessible partout, tout le temps.</p>
+                    </div>
+                    <div class="story-card reveal">
+                        <span class="step-number">02</span>
+                        <h3>Analyser</h3>
+                        <p>Transformez les données brutes en intelligence prédictive. Notre IA identifie les tendances, détecte les élèves en difficulté et vous donne les insights pour agir.</p>
+                    </div>
+                    <div class="story-card reveal">
+                        <span class="step-number">03</span>
+                        <h3>Automatiser</h3>
+                        <p>Libérez vos équipes des tâches chronophages. Générez des rapports complexes, communiquez avec les parents et gérez les finances en quelques clics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <!-- ======= HEADER ======= -->
- <header>
-  <nav class="navbar">
-    <div class="logo">
-      <a href="index.html">
-  <img src="https://i15.tvoysad.ru/2025/07/14/logos062d6aa61183c2c8.jpg" alt="Logo TIT SARL">
-      </a>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Accueil</a></li>
-      <li><a href="produits.html">Produits</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="apropos.html">À propos</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="client/login.html" class="btn-outline">Espace Client</a></li>
-    </ul>
-  </nav>
-</header>
+        <section id="fonctionnalites">
+            <div class="container">
+                <h2 class="reveal">Conçu pour la <span class="text-gradient">performance</span>.</h2>
+                <div class="bento-grid">
+                    <div class="bento-card col-span-2 tilt-card reveal">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 100 15 7.5 7.5 0 000-15zM21 21l-5.197-5.197" /></svg>
+                        <h3>Analytics Prédictifs</h3>
+                        <p>Anticipez les difficultés scolaires avant qu'elles ne surviennent. Notre IA vous alerte pour une intervention proactive.</p>
+                    </div>
+                     <div class="bento-card tilt-card reveal">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <h3>Sécurité de grade militaire</h3>
+                        <p>Chiffrement de bout-en-bout AES-256. Vos données sont une priorité absolue.</p>
+                    </div>
+                    <div class="bento-card tilt-card reveal">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>
+                        <h3>Mobile & Hors-ligne</h3>
+                        <p>Une expérience optimisée pour le mobile, fonctionnant même avec une connectivité limitée.</p>
+                    </div>
+                     <div class="bento-card col-span-2 tilt-card reveal">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.17 48.17 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>
+                        <h3>Portail de Communication Unifié</h3>
+                        <p>Connectez administration, enseignants et parents via une messagerie instantanée, sécurisée et intégrée.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      </section>
+        <section id="offre">
+            <div class="container reveal">
+                <div class="offer-wrapper">
+                     <div class="offer-details">
+                        <h2>Rejoignez les <span class="text-gradient">Pionniers</span>.</h2>
+                        <p>L'offre Fondateur est une opportunité unique de co-créer l'avenir de l'éducation avec nous, à des conditions exceptionnelles et à vie.</p>
+                        <div id="countdown">
+                            <div class="countdown-item"><span id="days">00</span><small>Jours</small></div>
+                            <div class="countdown-item"><span id="hours">00</span><small>Heures</small></div>
+                            <div class="countdown-item"><span id="minutes">00</span><small>Min</small></div>
+                            <div class="countdown-item"><span id="seconds">00</span><small>Sec</small></div>
+                        </div>
+                        <ul class="offer-benefits">
+                            <li>-50% sur votre abonnement. Garanti à vie.</li>
+                            <li>Déploiement et formation VIP offerts (valeur 2000$)</li>
+                            <li>Influence directe sur la roadmap produit</li>
+                            <li>Accès exclusif aux nouvelles fonctionnalités en beta</li>
+                        </ul>
+                    </div>
+                     <div class="form-container">
+                        <h3>Réservez votre place</h3>
+                        <form id="lead-form" method="POST" action="process_lead.php" novalidate>
+                            <!-- Honeypot anti-spam field -->
+                            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;" />
 
-  <footer>
-    &copy; 2025 TIT SARL. Tous droits réservés.
-  </footer>
+                            <div class="form-group">
+                                <label for="schoolName">Nom de l'établissement *</label>
+                                <input type="text" id="schoolName" name="schoolName" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contactName">Nom et prénom du responsable *</label>
+                                <input type="text" id="contactName" name="contactName" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email professionnel *</label>
+                                <input type="email" id="email" name="email" required inputmode="email" autocomplete="email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Téléphone *</label>
+                                <input type="tel" id="phone" name="phone" required inputmode="tel" autocomplete="tel">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="schoolType">Type d'établissement *</label>
+                                <select id="schoolType" name="schoolType" required>
+                                    <option value="">Sélectionner...</option>
+                                    <option value="primaire">École Primaire</option>
+                                    <option value="secondaire">École Secondaire</option>
+                                    <option value="lycee">Lycée</option>
+                                    <option value="universite">Université</option>
+                                    <option value="institut">Institut Technique</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="studentsCount">Nombre d'élèves (approx.)</label>
+                                <input type="text" id="studentsCount" name="studentsCount" placeholder="ex: 350">
+                            </div>
+
+                            <div class="form-group" style="display:flex; gap:10px; align-items:center;">
+                                <input type="checkbox" id="consent" name="consent" required style="width:auto;">
+                                <label for="consent" style="margin:0;">J'accepte la <a href="#" style="color: var(--primary-glow); text-decoration: underline;">politique de confidentialité</a> et le traitement de mes données.</label>
+                            </div>
+
+                            <div id="lead-feedback" role="alert" style="display:none; margin: 10px 0; font-weight: 600;"></div>
+
+                            <button type="submit" id="lead-submit" class="cta-button" style="width: 100%; margin-top: 1rem;">Demander mon accès Fondateur</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <div class="container">
+                <h2 class="reveal">Questions & Réponses</h2>
+                <div class="faq-container reveal">
+                    <div class="faq-item"><h3 class="faq-question">Qu'est-ce qui rend Skoola différent d'un simple logiciel de gestion ?</h3><div class="faq-answer"><p>La différence est l'IA. Les logiciels traditionnels stockent l'information. Skoola l'interprète. Nous n'automatisons pas seulement les tâches, nous fournissons des insights prédictifs pour vous aider à prendre de meilleures décisions pédagogiques et stratégiques.</p></div></div>
+                    <div class="faq-item"><h3 class="faq-question">Le déploiement est-il long et coûteux ?</h3><div class="faq-answer"><p>Non. Pour nos partenaires fondateurs, le déploiement et la formation sont entièrement gratuits. Notre équipe assure une transition fluide en moins de 48h, sans perturber vos opérations.</p></div></div>
+                    <div class="faq-item"><h3 class="faq-question">La plateforme est-elle sécurisée ?</h3><div class="faq-answer"><p>La sécurité est notre priorité absolue. Nous utilisons un chiffrement de niveau militaire (AES-256), une authentification multi-facteurs et une infrastructure cloud de pointe pour garantir que vos données sont protégées en permanence.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container footer-bottom">
+            <p>&copy; 2025 Skoola. Tous droits réservés. Construit pour l'Afrique, par des Africains.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                // --- 3D Tilt Effect for Bento Cards ---
+                const tiltCards = document.querySelectorAll('.tilt-card');
+                tiltCards.forEach(card => {
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const { width, height } = rect;
+                        const rotateX = (y / height - 0.5) * -15;
+                        const rotateY = (x / width - 0.5) * 15;
+                        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+                    });
+                });
+
+                // --- Hero Spotlight Effect ---
+                const heroSection = document.getElementById('hero');
+                const spotlight = document.getElementById('hero-spotlight');
+                if (heroSection && spotlight) {
+                    heroSection.addEventListener('mousemove', e => {
+                        const rect = heroSection.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        spotlight.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.06) 0%, transparent 20%)`;
+                    });
+                }
+
+                // --- Header scroll ---
+                const header = document.getElementById('main-header');
+                if (header) {
+                    window.addEventListener('scroll', () => { window.scrollY > 50 ? header.classList.add('scrolled') : header.classList.remove('scrolled'); });
+                }
+
+                // --- Countdown ---
+                const countDownDate = new Date().getTime() + (205 * 60 * 60 * 1000);
+                const timer = setInterval(function() {
+                    const now = new Date().getTime(); const distance = countDownDate - now;
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    const elDays = document.getElementById('days');
+                    const elHours = document.getElementById('hours');
+                    const elMinutes = document.getElementById('minutes');
+                    const elSeconds = document.getElementById('seconds');
+                    if (elDays && elHours && elMinutes && elSeconds) {
+                        elDays.innerText = String(days).padStart(2, '0');
+                        elHours.innerText = String(hours).padStart(2, '0');
+                        elMinutes.innerText = String(minutes).padStart(2, '0');
+                        elSeconds.innerText = String(seconds).padStart(2, '0');
+                    }
+                    if (distance < 0) { clearInterval(timer); const cd = document.getElementById('countdown'); if (cd) { cd.innerHTML = '<h4>Offre Expirée</h4>'; } }
+                }, 1000);
+
+                // --- FAQ ---
+                const faqItems = document.querySelectorAll('.faq-item');
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question');
+                    const answer = item.querySelector('.faq-answer');
+                    if (question && answer) {
+                        question.addEventListener('click', () => {
+                            const isActive = item.classList.contains('active');
+                            faqItems.forEach(i => { i.classList.remove('active'); const ans = i.querySelector('.faq-answer'); if (ans) ans.style.maxHeight = null; });
+                            if (!isActive) { item.classList.add('active'); answer.style.maxHeight = answer.scrollHeight + 'px'; }
+                        });
+                    }
+                });
+
+                // --- Reveal on scroll ---
+                const revealElements = document.querySelectorAll('.reveal');
+                if ('IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
+                    }, { threshold: 0.1 });
+                    revealElements.forEach(el => observer.observe(el));
+                } else {
+                    revealElements.forEach(el => el.classList.add('visible'));
+                }
+
+                // --- Lead Form AJAX Submission ---
+                const leadForm = document.getElementById('lead-form');
+                if (leadForm) {
+                    const submitBtn = document.getElementById('lead-submit');
+                    const feedback = document.getElementById('lead-feedback');
+
+                    function setFeedback(message, type) {
+                        if (!feedback) return;
+                        feedback.className = `alert ${type === 'success' ? 'alert-success' : 'alert-error'}`;
+                        feedback.textContent = message;
+                        feedback.style.display = 'block';
+                    }
+
+                    leadForm.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        if (feedback) feedback.style.display = 'none';
+                        if (submitBtn) {
+                            submitBtn.disabled = true;
+                            submitBtn.style.opacity = '0.7';
+                            submitBtn.textContent = 'Envoi en cours...';
+                        }
+
+                        try {
+                            const formData = new FormData(leadForm);
+                            const res = await fetch(leadForm.action, { method: 'POST', body: formData });
+                            const data = await res.json().catch(() => ({ success: false, error: 'Réponse invalide du serveur' }));
+                            if (data.success) { setFeedback(data.message || 'Inscription réussie !', 'success'); leadForm.reset(); }
+                            else { setFeedback(data.error || 'Une erreur est survenue. Merci de réessayer.', 'error'); }
+                        } catch (err) {
+                            setFeedback('Erreur réseau. Vérifiez votre connexion et réessayez.', 'error');
+                        } finally {
+                            if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = '1'; submitBtn.textContent = 'Demander mon accès Fondateur'; }
+                        }
+                    });
+                }
+            } catch (e) {
+                console.error('Erreur d\'initialisation:', e);
+            }
+        });
+    </script>
 
 </body>
 </html>
-
-
-  </header>
-
-  <!-- ======= HERO BANNER ======= -->
-  <section class="hero">
-    <div class="hero-content">
-  <h1>Votre sécurité, notre priorité</h1>
-  <p>Des solutions modernes et fiables pour protéger ce qui compte le plus.</p>
-      <a href="contact.html" class="btn">Demandez un devis gratuit</a>
-    </div>
- 
-  </section>
-
-  <!-- ======= PRÉSENTATION ======= -->
-  <section class="presentation">
-    <div class="container">
-      <h2>Qui sommes-nous ?</h2>
-      <p><strong>TIT SARL</strong> est une entreprise congolaise spécialisée dans l’installation et la vente de dispositifs de sécurité électronique de pointe pour entreprises, maisons et institutions.</p>
-    </div>
-  </section>
-
-  <!-- ======= SERVICES CLÉS ======= -->
-  <section class="services">
-    <div class="container">
-      <h2>Nos Services</h2>
-      <div class="service-grid">
-        <div class="service-item"><i class="fa fa-video"></i><h3>Vidéosurveillance</h3><p>Installation de caméras IP et analogiques.</p></div>
-        <div class="service-item"><i class="fa fa-lock"></i><h3>Contrôle d’accès</h3><p>Badges, empreintes, serrures électroniques.</p></div>
-        <div class="service-item"><i class="fa fa-bell"></i><h3>Alarmes anti-intrusion</h3><p>Protection contre le vol et les intrusions.</p></div>
-        <div class="service-item"><i class="fa fa-fire-extinguisher"></i><h3>Détection incendie</h3><p>Systèmes de détection de fumée modernes.</p></div>
-        <div class="service-item"><i class="fa fa-cogs"></i><h3>Maintenance</h3><p>Support et dépannage 24/7.</p></div>
-        <div class="service-item"><i class="fa fa-search"></i><h3>Audit & Conseil</h3><p>Évaluation et solutions sur mesure.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======= AVANTAGES ======= -->
-  <section class="avantages">
-    <div class="container">
-      <h2>Pourquoi nous choisir ?</h2>
-      <ul class="advantages-list">
-        <li><i class="fa fa-bolt"></i> Intervention rapide</li>
-        <li><i class="fa fa-certificate"></i> Produits certifiés</li>
-        <li><i class="fa fa-users"></i> Équipe expérimentée</li>
-        <li><i class="fa fa-headset"></i> Assistance 24/7</li>
-      </ul>
-      <div class="cta-buttons">
-        <a href="contact.html" class="btn">Contactez-nous maintenant</a>
-        <a href="assets/docs/catalogue.pdf" class="btn-outline" download>Télécharger notre catalogue</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======= FOOTER ======= -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 TIT SARL – Tous droits réservés</p>
-      <div class="socials">
-  <a href="https://facebook.com/TITSARL" target="_blank" rel="noopener" title="Page Facebook TIT SARL"><i class="fab fa-facebook"></i></a>
-  <a href="https://wa.me/243817775070" target="_blank" rel="noopener" title="Contact WhatsApp TIT SARL"><i class="fab fa-whatsapp"></i></a>
-      </div>
-    </div>
-  </footer>
-
-</body>
-</html>
-	
